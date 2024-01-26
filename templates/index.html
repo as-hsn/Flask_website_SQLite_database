@@ -1,0 +1,54 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+  {{ super() }}
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Sacramento" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Top Movies List{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1 class="heading">Top Movies List</h1>
+  <p class="description">These are all-time favorite movies.</p>
+  {% if len(all_data) == 0 %}
+    <center><h1>Currently No data</h1></center>
+  {% endif %}
+
+  {% for data in all_data %}
+      {% set encoded_image = base64.b64encode(data.image_url).decode('utf-8') %}
+      <div class="card">
+        <div class="front" style="background-image: url('data:image/png;base64,{{ encoded_image }}');">
+          <p class="large">{{ data.ranking }}</p>
+        </div>
+        <div class="back">
+          <div>
+            <div class="title">{{ data.title }} <span class="release_date">({{ data.year }})</span></div>
+            <div class="rating">
+              <label>{{ data.rating }}</label>
+              <i class="fas fa-star star"></i>
+            </div>
+            <p class="review">"{{ data.review }}"</p>
+            <p class="overview">
+              {{ data.description }}
+            </p>
+            <a href="{{url_for('update',id=data.id)}}" class="button">Update</a>
+            <a href="{{ url_for('delete', id=data.id)}}" class="button delete-button">Delete</a>
+          </div>
+        </div>
+      </div>
+
+    {% endfor %}
+</div>
+
+
+<div class="container text-center add">
+<a href="{{ url_for('add') }}" class="button">Add Movie</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+  {{ super() }}
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Add Movie{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1 class="heading">Add a Movie <center><h3>{{ error }}</h3></center></h1>
+
+  <form action="{{url_for( 'add' )}}" method="post">
+     <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" placeholder="" value="" required="" name="title">
+
+            </div>
+
+            <div class="col-sm-6">
+              <label for="year" class="form-label">Year</label>
+              <input type="text" class="form-control" id="year" placeholder="" value="" required="" name="year">
+
+            </div>
+            <div class="col-sm-6">
+              <label for="rating" class="form-label">Rating</label>
+              <input type="text" class="form-control" id="rating" placeholder="" value="" required="" name="rating">
+
+            </div>
+
+            <div class="col-sm-6">
+              <label for="ranking" class="form-label">Ranking</label>
+              <input type="text" class="form-control" id="ranking" placeholder="" value="" required="" name="ranking">
+
+            </div>
+
+
+            <div class="col-12">
+              <label for="review" class="form-label">Review <span class="text-body-secondary"></span></label>
+              <input type="text" class="form-control" id="review" placeholder="" name="review">
+
+            </div>
+
+            <div class="col-12">
+              <label for="description" class="form-label">Description</label>
+              <input type="text" class="form-control" id="description" placeholder="" required="" name="description">
+            </div>
+            <div class="mb-3">
+          <label for="formFileSm" class="form-label">Choose Image</label>
+          <input class="form-control form-control-sm" id="formFileSm" type="file" name="image">
+                <br>
+               <center> <button class="btn btn-primary" type="submit">Submit</button></center>
+</div>
+</div>
+ </form>
+</div>
+
+{% endblock %}

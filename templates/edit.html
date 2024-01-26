@@ -1,0 +1,38 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Edit Movies{% endblock %}
+
+{% block content %}
+<div class="content">
+  <h1 class="heading">Movie Title <center><h3>{{ error }}</h3></center></h1>
+
+    <p class="description">Edit Movie Rating and Review <br><br> Current Rating: <b>{{ data.rating }}</b>&nbsp;&nbsp;&nbsp; Current Review: <b>{{ data.review }}</b></p>
+      <form action="{{url_for( 'update', id=data.id )}}" method="post">
+     <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="title" class="form-label">Update Rating</label>
+              <input type="text" class="form-control" id="title" placeholder="" value="" required="" name="rating">
+
+            </div>
+
+            <div class="col-sm-6">
+              <label for="year" class="form-label">Update Review</label>
+              <input type="text" class="form-control" id="year" placeholder="" value="" required="" name="review">
+
+            </div>
+              <br><br><br><br>
+
+               <center> <button class="btn btn-primary" type="submit">Submit</button></center>
+</div>
+ </form>
+</div>
+  </div>
+{% endblock %}
